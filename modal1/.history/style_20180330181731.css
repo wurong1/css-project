@@ -1,0 +1,30 @@
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #b3b1b1;
+  animation: topDown 0.5;
+}
+
+section.modal-content {
+  width: 400px;
+  height: 200px;
+  position: relative;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -200px;
+  padding: 10px;
+}
+
+@keyframes topDown {
+  from {top: -300px; opcity: 0}
+  to {top: 0; opcity: 1}
+}
+
+.modal:target {
+  display: block;
+}
