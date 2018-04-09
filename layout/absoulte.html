@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      .test::after {
+        content: '';
+        clear: both;
+        display: block; /*inline-block, flex, table都可以*/
+      }
+      /* 或者 */
+      /* .test {
+          overflow: auto; // overflow: hidden
+      } */
+      /* 或者 */
+      /* .test {
+         display: inline-block;
+      } */
+    </style>
+</head>
+<body>
+  <div class="test">
+    <div style="float:left">呵呵呵</div>
+    <div style="float:left">啦啦</div>
+  </div>
+</body>
+</html>
+<!-- 
+    浮动和absolute都会造成父元素高度坍塌
+    float旁边的元素会围绕它布局
+    absolute旁边的元素认为它不纯在
+    float可以给它的父元素伪元素添加一个clear:both避免父元素坍塌
+-->
