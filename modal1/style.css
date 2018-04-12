@@ -1,6 +1,6 @@
 .modal {
   display: none;
-  position: fixed;
+  position: fixed; /*绝对定位和相对定位都会生成一个block元素*/
   top: 0;
   left: 0;
   right: 0;
@@ -11,7 +11,7 @@
 section.modal-content {
   width: 400px;
   height: 200px;
-  position: relative;
+  position: relative; /*可以使用absolute，相对于 static 定位以外的第一个父元素进行定位*/
   background-color: white;
   top: 50%;
   left: 50%;
