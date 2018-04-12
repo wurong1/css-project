@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .wrapper{
+      background: red;
+
+
+    }
+    .wrapper::after{
+      content: '';
+      clear: left;
+    /* 
+     *使用inline-block的话，::after默认的行高是页面font-size的基准值
+     *所以父元素被撑开的高度对应font-size的值
+     *当float元素的高度超出font-size的时候，父元素撑开的高度就不够了
+     *block元素的宽度默认为父容器的宽度
+    */
+      display: block; 
+    }
+    .float{
+      float: left;
+      width: 100px;
+      height: 200px;
+      background: yellowgreen;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="float">float</div>
+  </div>
+</body>
+</html>
+<!--
+  该元素的display为block,clear才有作用，inline元素为0*0的时候文档默认不会处理的
+-->

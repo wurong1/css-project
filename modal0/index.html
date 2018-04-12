@@ -27,6 +27,13 @@
        </div>  
    </div>
    <button id="test">click</button> 
-</body>
+   <div style="height: 900px">dsf</div>
+</div>
 <script src="main.js"></script>
 </html>
+<!-- 
+  1.position设置为fiexed或者absolute的元素，会遮挡它下面的元素，使得下面的元素点击事件无法生效，
+  可以使用pointer-event:none属性不捕获任何事件，可以穿透到下面的元素，可以设置pointer-event:auto
+  让该元素中某些子元素可以点击
+  2.页面出现滚动条的时候，背景滑动不会影响弹框的位置
+ -->
