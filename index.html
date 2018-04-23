@@ -6,14 +6,104 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-      .test{
+      .test {
         position: relative;
+      }
+      ul {
+        list-style: none;
+      }
+      ul li {
+        border-left: 1px solid green;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        padding-left: 10px;
+        padding-bottom: 30px;
+      }
+      ul li.today, ul li.future {
+        border-left: 1px solid #dad2d2;
+      }
+      ul li.future {
+        border-left: none;
+      }
+      ul li::before {
+        content: '';
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        background: green;
+        border-radius: 50%;
+        left: -7px;
+      }
+      ul li.today::before{
+        box-shadow: 0px 0px 14px green;
+        /* animation: today 5s linear infinite alternate; */
+      }
+      ul li.today::after{
+        content: '';
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        left: -9px;
+        top: -2px;
+        box-sizing: border-box;
+        z-index: -2;
+        box-shadow: 0px 0px 10px grey;
+      }
+      @keyframes today {
+        from{
+          transform: scale(1) rotate(0deg)
+        }
+        to{
+          transform: scale(2) rotate(360deg);
+        }
+      }
+      ul li.future::before{
+        background-color:#dad2d2;
+      }
+      ul li div:nth-child(2){
+        align-self: center;
+      }
+      ul li div p {
+        margin-top: -3px;
+        margin-bottom: 0px;
+      }
+      ul li.today div p:first-child {
+        color: green;
       }
     </style>
 </head>
 <body>
-  <div class="test">
-      <div>eeeeeeeeeeeeee</div>
-  </div>
+  <ul>
+    <li>
+      <div>
+        <p>2018-4-4</p>
+        <p>出借减少1000元</p>
+      </div>
+      <div>-1000</div>
+    </li>
+    <li>
+      <div>
+        <p>2018-4-4</p>
+        <p>出借减少1000元</p>
+      </div>
+      <div>+100</div>
+    </li>
+    <li class="today">
+      <div>
+        <p>今天 2018-4-4</p>
+        <p>出借减少1000元</p>
+      </div>
+      <div>+100</div>
+    </li>
+    <li class="future">
+      <div>
+        <p>今天 2018-4-4</p>
+        <p>出借减少1000元</p>
+      </div>
+      <div>+100</div>
+    </li>
+  </ul>
 </body>
 </html>
