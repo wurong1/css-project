@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      .wrapper{
+        display: flex;
+      }
+      .anim{
+          width: 100px;
+          height: 100px;
+          background-color: red;
+          animation: mymove 5s ease 3s infinite alternate;
+          position: relative; /*必须加positon,动画中的left是根据position定位的*/
+      }
+      .div{
+          width: 100px;
+          height: 100px;
+          background-color: yellowgreen;
+      }
+      @keyframes mymove{ /*通过keyframes规则，创建动画,可使用0%~100%代替from to*/
+        from {left: 0px;}
+        to{left: 300px}
+      }
+      @keyframes flash {
+        from,
+        50%,
+        to {
+            opacity: 1;
+        }
+
+        25%,
+        75% {
+            opacity: 0;
+        }
+        }
+
+        .flash {
+             width: 100px;
+          height: 100px;
+          background-color: red;
+          position: relative; 
+        animation-name: flash;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="flash"></div>
+        <div class="div"></div>
+    </div>
+</body>
+</html>
