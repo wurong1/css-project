@@ -34,25 +34,15 @@
       }
 
       @keyframes coin {
-        10% { transform : rotateX(36deg) }
-        20% { transform: rotateX(72deg) }
-        30% { transform: rotateX(108deg) }
-        40% { transform: rotateX(142deg) }
-        50% { transform: rotateX(180deg) }
-        60% { transform: rotateX(216deg) }
-        70% { transform: rotateX(252deg) }
-        80% { transform: rotateX(288deg) }
-        90% { transform: rotateX(324deg) }
-        100% { transform: rotateX(360deg) }  
+         from { transform : rotateX(0deg) }
+         to { transform : rotateX(360deg) }
       }
       .image-top, .image-bottom{
+         width: 100px;
+         height: 100px;
         -webkit-transition: all 2s ease-in-out;
         -moz-transition: all 2s ease-in-out;
         transition: all 2s ease-in-out;
-      }
-      .wrapper1 .image-top, .wrapper1 .image-bottom{
-         width: 100px;
-         height: 100px;
       }
       .wrapper1 .image-top{
         background-color: purple;
@@ -100,6 +90,59 @@
          transform: scaleX(1);
          transform-origin: left;
       }
+      .anim3{
+        width: 200px;
+        height: 100px;
+        background: peru;
+        text-align: center;
+        line-height: 100px;
+        animation: mode 2s linear forwards;
+        margin-top: 30px;
+      }
+      /*animation-fill-mode:
+      * forwards: 动画结束后保持结束状态，元素的样式将设置为动画的最后一帧的样式，正常情况下动画结束后会马上跳到初始状态
+      * backwards: 动画在等待的时间中，元素的样式将设置为动画的第一帧的样式
+      * both: 表示同时应用froward，backwards
+      * none: 正常播放结束后马上返回起点
+      */
+      @keyframes mode {
+        from{transform: scale(1)} /*from（0%）表示动画第一帧*/
+        to{transform: scale(2)} /*to(100%）表示动画第最后一帧*/
+      }
+
+      .init{
+        position: absolute;
+        animation: dispear 1s linear forwards;
+      }
+
+      .init::before{
+        content: '';
+        position: absolute;
+        width: 30px;
+        height: 20px;
+        background-color: inherit;
+        left: -4px;
+        border-top-left-radius: 50%;
+        border-bottom-left-radius: 50%;
+        transform: rotate(45deg)
+      }
+
+      .init::after{
+        content: '';
+        position: absolute;
+        width: 30px;
+        height: 20px;
+        background-color: inherit;
+        left: 4px;
+        border-top-right-radius: 50%;
+        border-bottom-right-radius: 50%;
+        transform: rotate(-45deg)
+      }
+
+      @keyframes dispear {
+        from{transform: translateY(0);opacity: 1}
+        to{transform: translateY(-20px);opacity: 0}
+      }
     </style>
 </head>
 <body>
@@ -115,6 +158,33 @@
       <div class="anim2"></div>
       移动鼠标哈哈
     </div>
+    <div class="anim3">animation-fill-mode</div>
+    <script>
+      document.addEventListener('click', function(e){
+        appendLove(e);
+      })
+
+      function appendLove(e) {
+        var clientX = e.clientX;
+        var clientY = e.clientY;
+        var dom = document.createElement('div');
+        dom.style.top =  clientY - 5 + 'px';
+        dom.style.left = clientX -5  + 'px';
+        dom.style.backgroundColor = bg3();
+        dom.classList.add('init');
+        document.body.appendChild(dom);
+        setTimeout(function() {
+         dom.parentNode.removeChild(dom);
+        }, 1000);
+      }
+
+      function bg3() {
+        var r = Math.floor(Math.random() * 256);
+        var g = Math.floor(Math.random() * 256);
+        var b = Math.floor(Math.random() * 256);
+        return "rgb(" + r + ',' + g + ',' + b + ")";//所有方法的拼接都可以用ES6新特性`其他字符串{$变量名}`替换
+      }
+    </script>
 </body>
 </html>
 
@@ -126,5 +196,6 @@
     2.动画没有执行可能是动画时间忘记加单位s
     3.旋转默认的原点是对称轴中心
     4.div::before div:hover::before
-    5.transform-origin,左上角（0，0），右下角（100%， 100%）
+    5.transform-origin,左上角（0，0），右下角（100%， 100%
+    6.设置桃心颜色用了background-color: inherit
 -->
