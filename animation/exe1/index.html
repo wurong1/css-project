@@ -143,6 +143,34 @@
         from{transform: translateY(0);opacity: 1}
         to{transform: translateY(-20px);opacity: 0}
       }
+
+      .wrappper3{
+        width: 300px;
+        height: 200px;
+        border: 2px solid black;
+        position: relative;
+        overflow-x: hidden; 
+      }
+      .wrappper3 .list{
+        position: absolute;
+        width: 1000px;
+        transition: left .9s ease-in-out;
+      }
+      
+      .wrappper3 .div1 , .wrappper3 .div2, .wrappper3 .div3{
+         width: 300px;
+         height: 200px;
+         display: inline-block;
+      }
+      .wrappper3 .div1 {
+        background: red;
+      }
+      .wrappper3 .div2 {
+        background: green;
+      }
+      .wrappper3 .div3 {
+        background: blue;
+      }
     </style>
 </head>
 <body>
@@ -159,6 +187,14 @@
       移动鼠标哈哈
     </div>
     <div class="anim3">animation-fill-mode</div>
+    <p style="margin-top: 90px">轮播图</p>
+    <div class="wrappper3">
+      <div class="list" id="list" style="left: 0px;">
+        <div class="div1">1</div>
+        <div class="div2">2</div>
+        <div class="div3">3</div>
+      </div>
+    </div>
     <script>
       document.addEventListener('click', function(e){
         appendLove(e);
@@ -184,10 +220,59 @@
         var b = Math.floor(Math.random() * 256);
         return "rgb(" + r + ',' + g + ',' + b + ")";//所有方法的拼接都可以用ES6新特性`其他字符串{$变量名}`替换
       }
+       var start;
+       var left;
+       var index = 0;
+       var offsetX;
+       document.getElementById('list').addEventListener('touchstart', function (e) {
+          console.log('touchstart', event.touches[0].clientX);
+          start = event.touches[0].clientX;
+          left = document.getElementById('list').style.left;
+        }, false)
+        document.getElementById('list').addEventListener('touchmove', function (e) {
+            console.log('touchmove', event.touches[0].clientX);
+            offsetX = event.touches[0].clientX - start;
+            document.getElementById('list').style.left = parseInt(left, 10) + offsetX + 'px';
+        }, false)
+        document.getElementById('list').addEventListener('touchend', function (e) {
+          console.log('touchend')
+          if(offsetX < 0) {
+            moveLeft();
+          } else {
+            moveRight();
+          }
+        }, false)
+
+      function moveRight() {
+        document.getElementById('list').style.transition = 'left .9s ease-in-out'
+        document.getElementById('list').style.left = (index + 1)*300 + 'px'
+        setTimeout(function() {
+          document.getElementById('list').style.transition = ''
+          index ++
+        }, 2000);
+      }
+
+      function moveLeft() {
+        document.getElementById('list').style.transition = 'left .9s ease-in-out'
+        document.getElementById('list').style.left = (index - 1) * 300 + 'px'
+        setTimeout(function () {
+            document.getElementById('list').style.transition = ''
+            index --
+          }, 2000);
+      }
+
+      var timer = setInterval(function() {
+         document.getElementById('list').style.left = (index - 1) * 300 + 'px'
+         index --
+         if(index === -3) {
+           index = 1
+           console.log('000000000')
+            document.getElementById('list').style.transition = 'inherit'
+         }
+      }, 900)
     </script>
 </body>
 </html>
-
 
 
 
@@ -198,4 +283,6 @@
     4.div::before div:hover::before
     5.transform-origin,左上角（0，0），右下角（100%， 100%
     6.设置桃心颜色用了background-color: inherit
+    7.轮播图https://www.imooc.com/search/?words=html5%E8%BD%AE%E6%92%AD%E5%9B%BE
+    8.document.getElementById('list').style.left 取不到值，需要在div上设置style=“left: 0px”初始值
 -->
